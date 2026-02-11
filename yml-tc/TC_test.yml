@@ -1,0 +1,25 @@
+appId: ${APP_ID}
+env:
+  PATH_FOLDER_REPORT: ./reports
+onFlowStart:
+  - runScript:
+      file: ../../../../configs/onflowstart/onflowstart.js
+      env:
+        JIRA_ISSUE: ${JIRA_ISSUE}
+  # - runScript:
+  #     file: get-balance.js
+  #     env:
+  #       BALANCE_STATE: ${BALANCE_STATE}
+onFlowComplete:
+  - runScript: ../../../../configs/onflowend/onflowend.js
+
+---
+
+- runFlow:
+    label: Step 1
+    commands:
+      - runFlow:
+          label: Step 2
+          commands:
+            - waitForAnimationToEnd
+            - takeScreenshot: ${output.PATH_FOLDER_REPORT}/01_TC_test
