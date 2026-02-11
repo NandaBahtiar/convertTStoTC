@@ -6,13 +6,25 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function convertTStoTC(inputDir, outputDir) {
+  // Bersihkan folder output terlebih dahulu
+  if (fs.existsSync(outputDir)) {
+    console.log('🧹 Membersihkan folder output...');
+    const existingFiles = fs.readdirSync(outputDir);
+    existingFiles.forEach(file => {
+      const filePath = path.join(outputDir, file);
+      fs.unlinkSync(filePath);
+      console.log(`   ✓ Menghapus: ${file}`);
+    });
+    console.log(`✅ Folder ${outputDir} berhasil dibersihkan\n`);
+  }
+  
   // Baca semua file di direktori input
   const files = fs.readdirSync(inputDir);
   
   // Filter hanya file TS_*.yml
   const tsFiles = files.filter(file => file.startsWith('TS_') && file.endsWith('.yml'));
   
-  console.log(`Ditemukan ${tsFiles.length} file TS untuk dikonversi`);
+  console.log(`📁 Ditemukan ${tsFiles.length} file TS untuk dikonversi`);
   
   tsFiles.forEach((tsFile, index) => {
     // Baca konten file TS
@@ -34,10 +46,10 @@ function convertTStoTC(inputDir, outputDir) {
     // Tulis file TC
     const tcPath = path.join(outputDir, tcFileName);
     fs.writeFileSync(tcPath, tcContent, 'utf8');
-    console.log(`✓ Berhasil membuat: ${tcFileName}`);
+    console.log(`   ✓ Berhasil membuat: ${tcFileName}`);
   });
   
-  console.log(`\nSelesai! Total ${tsFiles.length} file TC telah dibuat di ${outputDir}`);
+  console.log(`\n🎉 Selesai! Total ${tsFiles.length} file TC telah dibuat di ${outputDir}`);
 }
 
 function parseYamlSteps(content) {
@@ -113,7 +125,7 @@ ${runFlowSteps}`;
 }
 
 // Jalankan konversi
-const inputDir = path.join(__dirname, '../../BANDING');
+const inputDir = path.join(__dirname, '../../yml');
 const outputDir = path.join(__dirname, '../../yml-tc');
 
 // Buat direktori output jika belum ada
