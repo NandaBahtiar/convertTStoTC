@@ -34,23 +34,37 @@ const outputDir = path.join(__dirname, '../../yml-tc');  // Folder output TC
 
 ### 3. Tambahkan Script ke package.json
 
+Tambahkan script "convert" ke bagian "scripts" di `package.json` Anda:
+
 ```json
 {
   "scripts": {
-    "convert": "node src/utils/convertTStoTC.js",
-    "generate-all": "node src/main.js && node src/utils/convertTStoTC.js"
+    "convert": "node src/utils/convertTStoTC.js"
+  }
+}
+```
+Jika Anda ingin menjalankan generate TS dan konversi TC sekaligus, Anda bisa menambahkan:
+```json
+{
+  "scripts": {
+    "generate-all": "node src/main.js && npm run convert"
   }
 }
 ```
 
 ### 4. Jalankan Script
 
-**Konversi saja:**
+Pertama, jalankan script `generate` Anda (misalnya, yang menghasilkan file TS):
+```bash
+npm run generate
+```
+
+Setelah itu, jalankan script `convert` untuk mengkonversi file TS ke TC dan menyimpannya di folder `yml-tc`:
 ```bash
 npm run convert
 ```
 
-**Generate TS + Konversi TC sekaligus:**
+Jika Anda telah menambahkan script `generate-all` ke `package.json`, Anda bisa menjalankan keduanya secara berurutan:
 ```bash
 npm run generate-all
 ```
