@@ -23,12 +23,11 @@ Edit bagian path di `convertTStoTC.js` sesuai struktur folder Anda:
 
 ```javascript
 // Jalankan konversi
-const inputDir = path.join(__dirname, '../../BANDING');  // Folder input TS
+const inputDir = path.join(__dirname, '../../yml');  // Folder input TS
 const outputDir = path.join(__dirname, '../../yml-tc');  // Folder output TC
 ```
 
 **Contoh konfigurasi:**
-- Input dari folder `BANDING`: `'../../BANDING'`
 - Input dari folder `yml`: `'../../yml'`
 - Input dari folder `generated`: `'../../generated'`
 
@@ -76,7 +75,7 @@ project/
 ├── src/
 │   └── utils/
 │       └── convertTStoTC.js    # Script konversi
-├── BANDING/                     # Folder input (TS files)
+├── yml/                     # Folder input (TS files)
 │   ├── TS_CHG_TRF_44_001.yml
 │   ├── TS_CHG_TRF_44_002.yml
 │   └── ...
@@ -212,7 +211,7 @@ runFlowSteps += `            - assertVisible: "Transfer Berhasil"\n`;  // Tambah
 2. Pastikan folder input ada dan berisi file TS_*.yml
 
 ```javascript
-const inputDir = path.join(__dirname, '../../BANDING');  // Sesuaikan path
+const inputDir = path.join(__dirname, '../../yml');  // Sesuaikan path
 ```
 
 ### Error: Cannot find module
@@ -233,11 +232,3 @@ npm run convert
 1. Pastikan nama file dimulai dengan `TS_`
 2. Pastikan file berformat `.yml`
 3. Cek format isi file sesuai contoh
-
-## 📞 Support
-
-Jika ada pertanyaan atau issue, silakan hubungi tim development.
-
-## 📜 License
-
-Internal use only - BNI Mobile Banking Automation
