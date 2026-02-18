@@ -102,10 +102,7 @@ function generateTCContent(steps, tcFileName, isFirstOrLast) {
   #     file: get-balance.js
   #     env:
   #       BALANCE_STATE: \${BALANCE_STATE}`
-    : `  - runScript:
-      file: get-balance.js
-      env:
-        BALANCE_STATE: \${BALANCE_STATE}`;
+    : ``;
   
   return `appId: \${APP_ID}
 env:
